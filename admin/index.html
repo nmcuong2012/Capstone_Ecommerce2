@@ -15,12 +15,15 @@
       integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
       crossorigin="anonymous"
     />
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.5/css/jquery.dataTables.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+   
   </head>
 
   <body>
-    <div class="container">
+    <div class="container-fluid p-5">
       <nav class="navbar navbar-expand-sm navbar-dark bg-primary">
-        <a class="navbar-brand" href="#">Navbar</a>
+        <a class="navbar-brand" href="#">Dashboard</a>
         <button
           class="navbar-toggler d-lg-none"
           type="button"
@@ -37,29 +40,12 @@
                 >Home <span class="sr-only">(current)</span></a
               >
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Link</a>
-            </li>
-            <li class="nav-item dropdown">
-              <a
-                class="nav-link dropdown-toggle"
-                href="#"
-                id="dropdownId"
-                data-toggle="dropdown"
-                aria-haspopup="true"
-                aria-expanded="false"
-                >Dropdown</a
-              >
-              <div class="dropdown-menu" aria-labelledby="dropdownId">
-                <a class="dropdown-item" href="#">Action 1</a>
-                <a class="dropdown-item" href="#">Action 2</a>
-              </div>
-            </li>
+            
           </ul>
         </div>
       </nav>
 
-      <header class="display-4 my-4">Thực hành javascript - axios</header>
+      <header class="display-4 my-4">Quản lý sản phẩm</header>
       <!-- Phan tab menu -->
       <ul class="nav nav-tabs" role="tablist">
         <li class="nav-item">
@@ -95,6 +81,8 @@
               <!-- BEGIN TÌM KIẾM -->
               <div class="input-group mb-3">
                 <input
+                  id="searchInput"
+                  onkeyup="searchProducts()"
                   type="text"
                   class="form-control"
                   placeholder="Nhập từ khóa"
@@ -113,20 +101,25 @@
           <div class="clear-fix"></div>
           <div class="tblSanPham" id="tblSanPham">
             <!-- BEGIN TABLE SẢN PHẨM -->
-            <table id="tblDanhSachSP" class="table table-bordered">
-              <thead>
-                <th>STT</th>
-                <th>Tên Sản Phẩm</th>
-                <th>Giá</th>
-                <th>Screen</th>
-                <th>Camera sau</th>
-                <th>Camera trước</th>
-                <th>Hình ảnh</th>
-                <th>Mô tả</th>
-                <th>Loại</th>
+            <table  class="table">
+              <thead class="thead-light text-left justify-content-center align-content-center">
+                <th scope="col">STT</th>
+                <th scope="col" onclick="sortProductsByName()">Tên Sản Phẩm <i class="fa-solid fa-sort-down"></i></th>
+                <th scope="col" onclick="toggleSortProductsByPrice()">Giá <i class="fa-solid fa-sort-down"></i></th>
+                <th scope="col">Screen</th>
+                <th scope="col">Camera sau</th>
+                <th scope="col">Camera trước</th>
+                <th scope="col">Hình ảnh</th>
+                <th scope="col">Mô tả</th>
+                <th scope="col">Loại</th>
+                <th scope="col">Action</th>
               </thead>
-              <tbody ></tbody>
+              <tbody id="tblDanhSachSP"></tbody>
             </table>
+            <!-- Phân trang -->
+            <nav>
+              <ul class="pagination justify-content-center" id="pagination"></ul>
+            </nav>
             <!-- END TABLE SẢN PHẨM -->
           </div>
           <br />
@@ -210,7 +203,9 @@
                 <select class="form-control" id="loaiSP">
                   <option value="phone">Phone</option>
                   <option value="laptop">Laptop</option>
-                  <option value="other">Other</option>
+                  <option value="ipad">Ipad</option>
+                  <option value="order">Orther</option>
+
                 </select>
               </div>
             </div>
@@ -244,10 +239,12 @@
       integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
       crossorigin="anonymous"
     ></script>
+    <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
     <script src="../admin/models/Product.js"></script>
     <script src="../admin/services/productAPI.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/validate.js/0.13.1/validate.min.js"></script>
     <script src="../admin/controllers/main.js"></script>
   </body>
 </html>
