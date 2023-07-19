@@ -11,7 +11,7 @@ function apiGetProductById(productId) {
     method: "GET",
   });
 }
-// product = {name: "...", price: 1000, image: "...", type: "..."}
+
 function apiCreateProduct(product) {
   return axios({
     url: "https://64a6ad30096b3f0fcc804452.mockapi.io/Capstone_Ecommerce",

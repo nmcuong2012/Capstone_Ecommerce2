@@ -15,6 +15,9 @@
       integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
       crossorigin="anonymous"
     />
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.5/css/jquery.dataTables.css" />
+  
+
   </head>
 
   <body>
@@ -59,7 +62,7 @@
         </div>
       </nav>
 
-      <header class="display-4 my-4">Thực hành javascript - axios</header>
+      <header class="display-4 my-4">Quản lý sản phẩm</header>
       <!-- Phan tab menu -->
       <ul class="nav nav-tabs" role="tablist">
         <li class="nav-item">
@@ -113,19 +116,20 @@
           <div class="clear-fix"></div>
           <div class="tblSanPham" id="tblSanPham">
             <!-- BEGIN TABLE SẢN PHẨM -->
-            <table id="tblDanhSachSP" class="table table-bordered">
-              <thead>
-                <th>STT</th>
-                <th>Tên Sản Phẩm</th>
-                <th>Giá</th>
-                <th>Screen</th>
-                <th>Camera sau</th>
-                <th>Camera trước</th>
-                <th>Hình ảnh</th>
-                <th>Mô tả</th>
-                <th>Loại</th>
+            <table  class="table">
+              <thead class="thead-light">
+                <th scope="col">STT</th>
+                <th scope="col">Tên Sản Phẩm</th>
+                <th scope="col">Giá</th>
+                <th scope="col">Screen</th>
+                <th scope="col">Camera sau</th>
+                <th scope="col">Camera trước</th>
+                <th scope="col">Hình ảnh</th>
+                <th scope="col">Mô tả</th>
+                <th scope="col">Loại</th>
+                <th scope="col">Action</th>
               </thead>
-              <tbody ></tbody>
+              <tbody id="tblDanhSachSP"></tbody>
             </table>
             <!-- END TABLE SẢN PHẨM -->
           </div>
@@ -244,10 +248,12 @@
       integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
       crossorigin="anonymous"
     ></script>
+    <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
     <script src="../admin/models/Product.js"></script>
     <script src="../admin/services/productAPI.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/validate.js/0.13.1/validate.min.js"></script>
     <script src="../admin/controllers/main.js"></script>
   </body>
 </html>
