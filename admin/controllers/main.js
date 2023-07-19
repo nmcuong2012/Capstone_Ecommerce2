@@ -18,9 +18,9 @@ function createProduct() {
     name: getElement("#TenSP").value,
     price: +getElement("#GiaSP").value,
     screen: getElement("#ScreenSP").value,
-    backcamera: getElement("#camerasau").value,
-    frontcamera: getElement("#cameratruoc").value,
-    image: getElement("#HinhSP").value,
+    backCamera: getElement("#camerasau").value,
+    frontCamera: getElement("#cameratruoc").value,
+    img: getElement("#HinhSP").value,
     desc: getElement("#MotaSP").value,
     type: getElement("#loaiSP").value,
   };
@@ -162,8 +162,32 @@ function display(products) {
     );
   }, "");
 
+
   document.getElementById("tblDanhSachSP").innerHTML = html;
 }
+//TÌm kiếm
+
+function searchProducts() {
+  // Get the search keyword entered by the user
+  let keyword = getElement("#searchInput").value.trim().toLowerCase();
+
+  // Call the API to get all products
+  apiGetProducts()
+    .then((response) => {
+      // Filter the products based on the search keyword
+      let filteredProducts = response.data.filter((product) => {
+        // Convert both the product name and search keyword to lowercase for a case-insensitive search
+        return product.name.toLowerCase().includes(keyword);
+      });
+
+      // Display the filtered products
+      display(filteredProducts);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+}
+
 
 // ======= DOM =======
 getElement("#btnThemSP").onclick = () => {
@@ -221,3 +245,137 @@ function validateAndSubmit() {
     // $("#myModal").modal("hide");
   }
 }
+
+// pagination
+const productsPerPage = 10; // Number of products to display per page
+
+function display(products, currentPage = 1) {
+  // Calculate start and end indices of products to display on the current page
+  const startIndex = (currentPage - 1) * productsPerPage;
+  const endIndex = Math.min(startIndex + productsPerPage, products.length);
+
+  // Generate the HTML for the products on the current page
+  let html = "";
+  for (let i = startIndex; i < endIndex; i++) {
+    const product = products[i];
+    // Generate HTML for each product row
+    const productRowHTML = `
+      <tr>
+        <td>${i + 1}</td>
+        <td>${product.name}</td>
+        <td>${product.price}</td>
+        <td>${product.screen}</td>
+          <td>${product.backCamera}</td>
+          <td>${product.frontCamera}</td>
+          <td>
+            <img src="${product.img}" width="100px" height="100px" />
+          </td>
+          <td>${product.desc}</td>
+
+          <td>${product.type}</td>
+          <td class="d-flex flex-start">
+            <button
+              class="btn btn-primary"
+              onclick="selectProduct('${product.id}')"
+            >
+              Xem
+            </button>
+            <button
+              class="btn btn-danger"
+              onclick="deleteProduct('${product.id}')"
+            >
+              Xoá
+            </button>
+          </td>
+      </tr>
+    `;
+
+    // Append the row HTML to the overall HTML
+    html += productRowHTML;
+  }
+
+  // Update the table body with the generated HTML
+  document.getElementById("tblDanhSachSP").innerHTML = html;
+
+  // Update pagination
+  updatePagination(products, currentPage);
+}
+
+function updatePagination(products, currentPage) {
+  const totalPages = Math.ceil(products.length / productsPerPage);
+  let paginationHTML = "";
+
+  for (let i = 1; i <= totalPages; i++) {
+    paginationHTML += `
+      <li class="page-item${i === currentPage ? " active" : ""}">
+        <a class="page-link" href="#" onclick="changePage(${i})">${i}</a>
+      </li>
+    `;
+  }
+
+  document.getElementById("pagination").innerHTML = paginationHTML;
+}
+
+function changePage(pageNumber) {
+  apiGetProducts()
+    .then((response) => {
+      // Get all products from the API
+      const products = response.data;
+
+      // Display the specified page
+      display(products, pageNumber);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+}
+
+// Call this function on page load to display the first page of products
+changePage(1);
+
+// Sort
+let currentSortOrder = "asc"; // Default sorting order is ascending
+
+function sortProductsByName() {
+  apiGetProducts()
+    .then((response) => {
+      // Get all products from the API
+      const products = response.data;
+
+      // Sort products by name in ascending order
+      products.sort((a, b) => a.name.localeCompare(b.name, "en", { sensitivity: "base" }));
+
+      // Display the sorted products
+      display(products);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+}
+
+function toggleSortProductsByPrice() {
+  apiGetProducts()
+    .then((response) => {
+      // Get all products from the API
+      const products = response.data;
+
+      // Sort products by price based on the current sorting order
+      if (currentSortOrder === "asc") {
+        // Sort in ascending order
+        products.sort((a, b) => a.price - b.price);
+        currentSortOrder = "desc"; // Update current sorting order
+      } else {
+        // Sort in descending order
+        products.sort((a, b) => b.price - a.price);
+        currentSortOrder = "asc"; // Update current sorting order
+      }
+
+      // Display the sorted products
+      display(products);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+}
+
+// Rest of the code remains the same...
