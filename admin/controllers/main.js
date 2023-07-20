@@ -223,7 +223,7 @@ function validateAndSubmit() {
   const formData = {
     TenSP: document.getElementById('TenSP').value,
     GiaSP: document.getElementById('GiaSP').value,
-    // Get other form field values similarly
+ 
   };
 
   // Perform the validation
@@ -237,12 +237,6 @@ function validateAndSubmit() {
       const errorMessage = errorMessages.join(', ');
       alert(errorMessage);
     }
-  } else {
-    // If no errors, proceed with form submission (you can implement this part)
-    // For example, you can call a function to submit the form to the server
-    // submitFormToServer(formData);
-    // Close the modal if needed
-    // $("#myModal").modal("hide");
   }
 }
 
@@ -358,7 +352,6 @@ function toggleSortProductsByPrice() {
     .then((response) => {
       // Get all products from the API
       const products = response.data;
-
       // Sort products by price based on the current sorting order
       if (currentSortOrder === "asc") {
         // Sort in ascending order
@@ -369,7 +362,6 @@ function toggleSortProductsByPrice() {
         products.sort((a, b) => b.price - a.price);
         currentSortOrder = "asc"; // Update current sorting order
       }
-
       // Display the sorted products
       display(products);
     })
