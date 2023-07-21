@@ -1,3 +1,5 @@
+const products = [];
+
 function displayProduct(product) {
   const menuItemDiv = document.createElement("div");
   menuItemDiv.classList.add(
@@ -27,15 +29,50 @@ function displayProduct(product) {
 
   const addToCartButton = document.createElement("button");
   addToCartButton.textContent = "Thêm vào giỏ hàng";
-  addToCartButton.classList.add("btn", "btn-primary"); // Thêm lớp CSS của Bootstrap cho nút
+  addToCartButton.classList.add("btn", "btn-primary");
   addToCartButton.addEventListener("click", () => {
-    addToCart(product); // Gọi hàm xử lý thêm sản phẩm vào giỏ hàng khi nút được nhấp67yum12;./op
+    addToCart(product);
   });
   menuItemDiv.appendChild(addToCartButton);
   const menuDiv = document.querySelector(".menu-item");
   menuDiv.appendChild(menuItemDiv);
 }
+const cart = {
+  products: [],
+  getTotalQuantity() {
+    return this.products.reduce(
+      (total, product) => total + product.quantity,
+      0
+    );
+  },
+};
 
+function updateCartIcon() {
+  const cartIcon = document.querySelector(".cart-icon");
+  const cartQuantity = document.querySelector(".cart-quantity");
+
+  const totalQuantity = cart.getTotalQuantity();
+
+  cartQuantity.textContent = totalQuantity;
+
+  if (totalQuantity > 0) {
+    cartQuantity.style.display = "block";
+  } else {
+    cartQuantity.style.display = "none";
+  }
+}
+
+function addToCart(product) {
+  const existingProduct = cart.products.find((p) => p.id === product.id);
+
+  if (existingProduct) {
+    existingProduct.quantity++;
+  } else {
+    cart.products.push({ ...product, quantity: 1 });
+  }
+
+  updateCartIcon();
+}
 async function displayProductsFromApi() {
   try {
     const response = await apiGetProducts();
@@ -53,8 +90,103 @@ async function displayProductsFromApi() {
     console.error("Error fetching products:", error);
   }
 }
+function showModal() {
+  if (!Array.isArray(cart.products)) {
+    console.error("Invalid input. 'products' must be an array.");
+    return;
+  }
 
-// Gọi hàm để hiển thị sản phẩm từ API khi trang được load
+  const modal = document.querySelector(".modal");
+  const cartItems = document.querySelector(".cart-items");
+
+  cartItems.innerHTML = "";
+
+  cart.products.forEach((product) => {
+    const productDiv = document.createElement("div");
+    productDiv.classList.add("cart-item");
+
+    const productImage = document.createElement("img");
+    productImage.src = product.img;
+    productDiv.appendChild(productImage);
+
+    const productName = document.createElement("h2");
+    productName.textContent = product.name;
+    productDiv.appendChild(productName);
+
+    const productPrice = document.createElement("p");
+    productPrice.textContent = "Giá: $" + product.price;
+    productDiv.appendChild(productPrice);
+
+    const productQuantity = document.createElement("p");
+    productQuantity.textContent = "Số lượng: " + product.quantity;
+    productDiv.appendChild(productQuantity);
+
+    cartItems.appendChild(productDiv);
+
+    const decreaseButton = document.createElement("button");
+    decreaseButton.textContent = "-";
+    decreaseButton.classList.add("quantity-button");
+    decreaseButton.addEventListener("click", () => {
+      decreaseQuantity(product);
+      showModal();
+    });
+    productDiv.appendChild(decreaseButton);
+
+    const increaseButton = document.createElement("button");
+    increaseButton.textContent = "+";
+    increaseButton.classList.add("quantity-button");
+    increaseButton.addEventListener("click", () => {
+      increaseQuantity(product);
+      showModal();
+    });
+    productDiv.appendChild(increaseButton);
+  });
+
+  const totalPrice = calculateTotalPrice();
+  const totalDiv = document.createElement("div");
+  totalDiv.textContent = "Tổng giá trị đơn hàng: $" + totalPrice;
+  cartItems.appendChild(totalDiv);
+
+  modal.classList.add("active");
+}
+function calculateTotalPrice() {
+  let totalPrice = 0;
+
+  cart.products.forEach((product) => {
+    totalPrice += product.price * product.quantity;
+  });
+
+  return totalPrice;
+}
+function increaseQuantity(product) {
+  const existingProduct = cart.products.find((p) => p.id === product.id);
+
+  if (existingProduct) {
+    existingProduct.quantity++;
+  }
+}
+
+function decreaseQuantity(product) {
+  const existingProduct = cart.products.find((p) => p.id === product.id);
+
+  if (existingProduct) {
+    existingProduct.quantity--;
+    if (existingProduct.quantity < 1) {
+      cart.products = cart.products.filter((p) => p.id !== product.id);
+    }
+  }
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  const cartIcon = document.querySelector(".cart-icon");
+  cartIcon.addEventListener("click", () => {
+    showModal(cart.products);
+  });
+});
+document.getElementById("btn-checkout").onclick = () => {
+  const toal = calculateTotalPrice();
+  alert("Bạn đã thanh toán thành công số tiền :" + toal);
+};
 window.onload = () => {
   displayProductsFromApi();
 };
