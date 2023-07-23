@@ -1,8 +1,8 @@
-@charset "UTF-8";
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: CerebriSans-Regular, -apple-system, system-ui, Roboto, sans-serif;
 }
 
 html {
@@ -27,6 +27,21 @@ html {
   justify-content: flex-end;
   padding-right: 20%;
 }
+#header #navbarNav .cart-icon {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+#header #navbarNav .cart-icon .cart-quantity {
+  font-size: 14px;
+  margin-left: 5px;
+  color: #2a73dd;
+  font-weight: 500;
+}
+#header #navbarNav .cart-icon .fa {
+  font-size: 1.1rem;
+  color: #2a73dd;
+}
 #header #navbarNav .nav-item .nav-link {
   padding: 25px;
   font-size: 1.1rem;
@@ -45,24 +60,29 @@ html {
 }
 #header #navbarNav .nav-item.active .nav-link {
   color: #2a73dd;
+  font-weight: 700;
 }
 #header #navbarNav .nav-item.active .nav-link::after {
   transform: scaleX(1);
 }
 
 .menu-item {
+  flex-wrap: wrap;
   padding-top: 150px;
-  margin-bottom: 10px;
-  display: flex;
+  justify-content: space-between;
 }
 .menu-item .product-item {
+  flex: 0 0 calc(33.33% - 20px);
   min-height: 300px;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 0px;
   text-align: center;
   padding: 20px;
+  margin-bottom: 30px;
 }
 .menu-item .product-item h2 {
-  font-size: 14px;
+  font-size: 1.1rem;
+  margin-top: 10px;
+  font-weight: 600;
 }
 .menu-item .product-item img {
   height: 150px;
@@ -72,10 +92,46 @@ html {
   font-size: 14px;
   font-weight: 500;
 }
+.menu-item .product-item span {
+  color: green;
+  font-weight: 700;
+  display: block;
+  margin-bottom: 30px;
+}
+.menu-item .product-item .product-buttons {
+  margin-top: 0;
+}
+.menu-item .product-item .product-buttons .btn-add {
+  background-color: #c2fbd7;
+  border-radius: 100px;
+  box-shadow: rgba(44, 187, 99, 0.2) 0 -25px 18px -14px inset, rgba(44, 187, 99, 0.15) 0 1px 2px, rgba(44, 187, 99, 0.15) 0 2px 4px, rgba(44, 187, 99, 0.15) 0 4px 8px, rgba(44, 187, 99, 0.15) 0 8px 16px, rgba(44, 187, 99, 0.15) 0 16px 32px;
+  color: green;
+  cursor: pointer;
+  display: inline-block;
+  font-family: CerebriSans-Regular, -apple-system, system-ui, Roboto, sans-serif;
+  padding: 7px 20px;
+  text-align: center;
+  text-decoration: none;
+  transition: all 250ms;
+  border: 0;
+  font-size: 16px;
+  -moz-user-select: none;
+       user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+.menu-item .product-item .product-buttons .btn-add:hover {
+  box-shadow: rgba(44, 187, 99, 0.35) 0 -25px 18px -14px inset, rgba(44, 187, 99, 0.25) 0 1px 2px, rgba(44, 187, 99, 0.25) 0 2px 4px, rgba(44, 187, 99, 0.25) 0 4px 8px, rgba(44, 187, 99, 0.25) 0 8px 16px, rgba(44, 187, 99, 0.25) 0 16px 32px;
+  transform: scale(1.05) rotate(-1deg);
+}
+.menu-item .product-item:hover {
+  transform: scale(1.1);
+  transition: all 0.5s ease;
+}
 
 .modal {
-  /* Thêm kiểu CSS để ẩn modal khi chưa hiển thị */
   display: none;
+  position: fixed;
   top: 0;
   left: auto;
   right: 0;
@@ -83,7 +139,13 @@ html {
   height: 100%;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
   z-index: 9999;
-  background-color: #72aec8;
+  background-color: #fff;
+}
+.modal #btn-close {
+  position: absolute;
+  z-index: 999;
+  top: 0;
+  right: 0;
 }
 @keyframes square-in-bottom-left {
   from {
@@ -107,22 +169,21 @@ html {
   position: relative;
 }
 .modal .modal-heading h1 {
-  color: #fff;
+  color: black;
   font-size: 1.8rem;
   text-align: center;
   padding-top: 20px;
-  font-family: "Courier New", Courier, monospace;
+  font-family: CerebriSans-Regular, -apple-system, system-ui, Roboto, sans-serif;
   position: absolute;
   top: 0;
   left: 50%;
   transform: translateX(-50%);
   width: 100%;
-  z-index: 1;
 }
 
 .modal-content {
   top: 50%;
-  font-family: "Courier New", Courier, monospace;
+  font-family: CerebriSans-Regular, -apple-system, system-ui, Roboto, sans-serif;
   left: 50%;
   width: 100%;
   height: 80%;
@@ -142,24 +203,32 @@ html {
   font-weight: 600;
 }
 
-/* Thêm kiểu CSS để hiển thị modal khi được kích hoạt */
 .modal.active {
   display: block;
 }
 
 .cart-item {
-  padding-left: 40px;
   margin-bottom: 20px;
+  text-align: center;
 }
 .cart-item img {
   height: 100px;
 }
 .cart-item .quantity-button {
   font-size: 1.1rem;
-  margin-right: 20px;
   background-color: #2a73dd;
   border: none;
   padding: 2px 7px;
-  border-radius: 5px;
   color: #fff;
+  margin-bottom: 10px;
+}
+
+.carousel .carousel-inner .carousel-item img {
+  -o-object-fit: fill;
+     object-fit: fill;
+  max-height: 500px;
+}
+
+.price-total {
+  text-align: center;
 }/*# sourceMappingURL=user.css.map */

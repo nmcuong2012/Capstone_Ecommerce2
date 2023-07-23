@@ -1,11 +1,3 @@
-// .navbar-brand {
-//   @include styleText($color-blue-1, $fs-3, $fw-3);
-// }
-// #navbarNav {
-//   justify-content: flex-end;
-
-// }
-
 #header {
   position: fixed;
   width: 100%;
@@ -21,6 +13,21 @@
   #navbarNav {
     justify-content: flex-end;
     padding-right: 20%;
+    .cart-icon {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      .cart-quantity {
+        font-size: $fs-1;
+        margin-left: 5px;
+        color: $color-blue-2;
+        font-weight: $fw-2;
+      }
+      .fa {
+        font-size: $fs-2;
+        color: $color-blue-2;
+      }
+    }
     .nav-item {
       .nav-link {
         padding: 25px;
@@ -44,6 +51,7 @@
       &.active {
         .nav-link {
           color: $color-blue-2;
+          font-weight: $fw-4;
 
           &::after {
             transform: scaleX(1);
