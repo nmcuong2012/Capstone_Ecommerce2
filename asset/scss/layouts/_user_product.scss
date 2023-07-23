@@ -1,15 +1,18 @@
 .menu-item {
+  flex-wrap: wrap;
   padding-top: 150px;
-  margin-bottom: 10px;
-  display: flex;
+  justify-content: space-between;
   .product-item {
+    flex: 0 0 calc(33.33% - 20px);
     min-height: 300px;
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
-      rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 0px;
     text-align: center;
     padding: 20px;
+    margin-bottom: 30px;
     h2 {
-      font-size: $fs-1;
+      font-size: $fs-2;
+      margin-top: 10px;
+      font-weight: $fw-3;
     }
     img {
       height: 150px;
@@ -17,13 +20,54 @@
     p {
       @include styleText($color-blue-1, $fs-1, $fw-2);
     }
+    span {
+      color: green;
+      font-weight: $fw-4;
+      display: block;
+      margin-bottom: 30px;
+    }
+    .product-buttons {
+      margin-top: 0;
+      .btn-add {
+        background-color: #c2fbd7;
+        border-radius: 100px;
+        box-shadow: rgba(44, 187, 99, 0.2) 0 -25px 18px -14px inset,
+          rgba(44, 187, 99, 0.15) 0 1px 2px, rgba(44, 187, 99, 0.15) 0 2px 4px,
+          rgba(44, 187, 99, 0.15) 0 4px 8px, rgba(44, 187, 99, 0.15) 0 8px 16px,
+          rgba(44, 187, 99, 0.15) 0 16px 32px;
+        color: green;
+        cursor: pointer;
+        display: inline-block;
+        font-family: CerebriSans-Regular, -apple-system, system-ui, Roboto,
+          sans-serif;
+        padding: 7px 20px;
+        text-align: center;
+        text-decoration: none;
+        transition: all 250ms;
+        border: 0;
+        font-size: 16px;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+      }
+      .btn-add:hover {
+        box-shadow: rgba(44, 187, 99, 0.35) 0 -25px 18px -14px inset,
+          rgba(44, 187, 99, 0.25) 0 1px 2px, rgba(44, 187, 99, 0.25) 0 2px 4px,
+          rgba(44, 187, 99, 0.25) 0 4px 8px, rgba(44, 187, 99, 0.25) 0 8px 16px,
+          rgba(44, 187, 99, 0.25) 0 16px 32px;
+        transform: scale(1.05) rotate(-1deg);
+      }
+    }
+  }
+  .product-item:hover {
+    transform: scale(1.1);
+    transition: all 0.5s ease;
   }
 }
 .modal {
-  /* Thêm kiểu CSS để ẩn modal khi chưa hiển thị */
   display: none;
 
-  // position: fixed;
+  position: fixed;
   top: 0;
   left: auto;
   right: 0;
@@ -33,8 +77,14 @@
     rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
     rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
   z-index: 9999;
-  background-color: $color-menu-item;
+  background-color: #fff;
 
+  #btn-close {
+    position: absolute;
+    z-index: 999;
+    top: 0;
+    right: 0;
+  }
   @keyframes square-in-bottom-left {
     from {
       clip-path: inset(0 0 100% 100%);
@@ -56,26 +106,25 @@
   .modal-heading {
     position: relative;
     h1 {
-      color: $color-white-3;
+      color: black;
       font-size: $fs-3;
       text-align: center;
       padding-top: 20px;
-      font-family: "Courier New", Courier, monospace;
+      font-family: CerebriSans-Regular, -apple-system, system-ui, Roboto,
+        sans-serif;
       position: absolute;
       top: 0;
       left: 50%;
       transform: translateX(-50%);
       width: 100%;
-      z-index: 1;
+      // z-index: 1;
     }
   }
 }
 
 .modal-content {
   top: 50%;
-  font-family: "Courier New", Courier, monospace;
-  // position: absolute;
-  // top: 20%;
+  font-family: CerebriSans-Regular, -apple-system, system-ui, Roboto, sans-serif;
   left: 50%;
   width: 100%;
   height: 80%;
@@ -96,23 +145,35 @@
   }
 }
 
-/* Thêm kiểu CSS để hiển thị modal khi được kích hoạt */
 .modal.active {
   display: block;
 }
 .cart-item {
-  padding-left: 40px;
   margin-bottom: 20px;
+  text-align: center;
   img {
     height: 100px;
   }
   .quantity-button {
     font-size: $fs-2;
-    margin-right: 20px;
+    // margin-right: 20px;
     background-color: $color-blue-2;
     border: none;
     padding: 2px 7px;
-    border-radius: 5px;
     color: $color-white-3;
+    margin-bottom: 10px;
   }
+}
+.carousel {
+  .carousel-inner {
+    .carousel-item {
+      img {
+        object-fit: fill;
+        max-height: 500px;
+      }
+    }
+  }
+}
+.price-total {
+  text-align: center;
 }
