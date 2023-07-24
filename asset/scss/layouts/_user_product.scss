@@ -66,7 +66,6 @@
 }
 .modal {
   display: none;
-
   position: fixed;
   top: 0;
   left: auto;
@@ -84,6 +83,7 @@
     z-index: 999;
     top: 0;
     right: 0;
+    color: red !important;
   }
   @keyframes square-in-bottom-left {
     from {
@@ -102,14 +102,60 @@
     position: absolute;
     bottom: 0;
     width: 100%;
+    align-items: center;
+    background-image: linear-gradient(144deg, #af40ff, #5b42f3 50%, #00ff00);
+    border: 0;
+    border-radius: 8px;
+    box-shadow: rgba(65, 252, 127, 0.2) 0 15px 30px -5px;
+    box-sizing: border-box;
+    color: #ffffff;
+    display: flex;
+    font-family: Phantomsans, sans-serif;
+    font-size: $fs-1;
+    justify-content: center;
+    line-height: 1em;
+    max-width: 100%;
+    min-width: 140px;
+    padding: 3px;
+    text-decoration: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    white-space: nowrap;
+    cursor: pointer;
+  }
+
+  .btn-checkout:active,
+  .btn-checkout:hover {
+    outline: 0;
+  }
+
+  .btn-checkout span {
+    background-color: rgb(6, 150, 42);
+    padding: 10px 24px;
+    border-radius: 6px;
+    width: 100%;
+    height: 100%;
+    transition: 300ms;
+  }
+
+  .btn-checkout:hover span {
+    background: none;
+  }
+
+  @media (min-width: 768px) {
+    .btn-checkout {
+      font-size: 24px;
+      min-width: 196px;
+    }
   }
   .modal-heading {
     position: relative;
     h1 {
-      color: black;
+      color: #176b87;
       font-size: $fs-3;
       text-align: center;
-      padding-top: 20px;
+      padding-top: 50px;
       font-family: CerebriSans-Regular, -apple-system, system-ui, Roboto,
         sans-serif;
       position: absolute;
@@ -117,25 +163,27 @@
       left: 50%;
       transform: translateX(-50%);
       width: 100%;
-      // z-index: 1;
     }
   }
 }
 
 .modal-content {
-  top: 50%;
+  top: 55%;
   font-family: CerebriSans-Regular, -apple-system, system-ui, Roboto, sans-serif;
   left: 50%;
   width: 100%;
-  height: 80%;
+  height: 75%;
   overflow-y: auto;
   transform: translate(-50%, -50%);
-  background-color: #fff;
   padding-top: 60px;
-  border-radius: 5px;
+  border: none;
   transition: right 1s ease;
   animation: 2.5s cubic-bezier(0.25, 1, 0.3, 1) square-in-bottom-left both;
   z-index: 0;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
+    rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+  z-index: 9999;
 
   h2 {
     font-size: $fs-2;
@@ -148,22 +196,28 @@
 .modal.active {
   display: block;
 }
-.cart-item {
-  margin-bottom: 20px;
-  text-align: center;
-  img {
-    height: 100px;
+.cart-items {
+  .total-div {
+    text-align: center;
   }
-  .quantity-button {
-    font-size: $fs-2;
-    // margin-right: 20px;
-    background-color: $color-blue-2;
-    border: none;
-    padding: 2px 7px;
-    color: $color-white-3;
-    margin-bottom: 10px;
+  .cart-item {
+    margin-bottom: 20px;
+    text-align: center;
+    img {
+      height: 100px;
+    }
+    .quantity-button {
+      font-size: $fs-2;
+      // margin-right: 20px;
+      background-color: $color-blue-2;
+      border: none;
+      padding: 2px 7px;
+      color: $color-white-3;
+      margin-bottom: 10px;
+    }
   }
 }
+
 .carousel {
   .carousel-inner {
     .carousel-item {
