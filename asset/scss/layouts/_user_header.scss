@@ -2,35 +2,39 @@
   position: fixed;
   width: 100%;
   z-index: 10;
-  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 1px, rgb(51, 51, 51) 0px 0px 0px 2px;
-
+  .cart-icon {
+    display: flex;
+    align-items: center;
+    @media (max-width: 767px) {
+      margin-left: 30px;
+    }
+    cursor: pointer;
+    .cart-quantity {
+      font-size: $fs-1;
+      margin-left: 5px;
+      color: $color-blue-2;
+      font-weight: $fw-2;
+    }
+    .fa {
+      font-size: $fs-2;
+      color: $color-blue-2;
+    }
+    .fa:hover {
+      transform: scale(1.1);
+      transition: all 0.5s ease;
+    }
+  }
   .navbar-brand {
     @include styleText($color-blue-2, $fs-3, $fw-4);
     font-family: "Lobster", cursive;
-    padding-left: 20%;
+    padding-left: 10%;
   }
 
   #navbarNav {
     justify-content: flex-end;
     padding-right: 20%;
-    .cart-icon {
-      display: flex;
-      align-items: center;
-      cursor: pointer;
-      .cart-quantity {
-        font-size: $fs-1;
-        margin-left: 5px;
-        color: $color-blue-2;
-        font-weight: $fw-2;
-      }
-      .fa {
-        font-size: $fs-2;
-        color: $color-blue-2;
-      }
-      .fa:hover {
-        transform: scale(1.1);
-        transition: all 0.5s ease;
-      }
+    @media (max-width: 991px) and(min-width: 767px) {
+      padding-right: 2%;
     }
     .nav-item {
       .nav-link {

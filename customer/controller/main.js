@@ -25,7 +25,7 @@ function displayProduct(product) {
   menuItemDiv.appendChild(productPrice);
 
   const productCamera = document.createElement("p");
-  productCamera.textContent = "Thông số :" + product.backCamera;
+  productCamera.textContent = product.backCamera;
   menuItemDiv.appendChild(productCamera);
 
   const buttonDiv = document.createElement("div");
@@ -271,6 +271,24 @@ function checkLocalStorage() {
     updateCartIcon();
   }
 }
+const navLinks = document.querySelectorAll(".nav-link");
+
+const navbarCollapse = document.querySelector(".navbar-collapse");
+
+function closeNavbarCollapse() {
+  if (navbarCollapse.classList.contains("show")) {
+    navbarCollapse.classList.remove("show");
+  }
+}
+
+navLinks.forEach((link) => {
+  link.addEventListener("click", (event) => {
+    event.preventDefault();
+    const targetId = link.getAttribute("href");
+    document.querySelector(targetId).scrollIntoView({ behavior: "smooth" });
+    closeNavbarCollapse();
+  });
+});
 window.onload = () => {
   checkLocalStorage();
   displayProductsFromApi();

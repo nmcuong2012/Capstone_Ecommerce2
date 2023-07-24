@@ -26,9 +26,10 @@
 
 <body>
   <header id="header">
-          <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="./user.html">CYBERSHOP</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="true" aria-label="Toggle navigation">
+          <nav class="navbar navbar-expand-md navbar-light bg-light">
+            <div class="container-fluid">
+              <a class="navbar-brand" href="./user.html">CYBERSHOP</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="true" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
@@ -37,19 +38,21 @@
                   <a class="nav-link" href="#">Home</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#products">Shops</a>
+                  <a class="nav-link" href="#productList">Shops</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#">Services</a>
+                  <a class="nav-link" href="#productList">Services</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="#">Contacts</a>
                 </li>
               </ul>
-              <div class="cart-icon">
+              <div class="cart-icon ml-md-5">
                 <i class="fa fa-shopping-cart" type="button"></i>
                 <span class="cart-quantity">0</span>
               </div>
+            </div>
+            
         </nav> 
   </header>
   <div class="modal">
@@ -66,12 +69,8 @@
     <button class="btn-checkout" id="btn-checkout"><span class="text">Thanh toán</span></button>
 </div>
   <!-- Carousel -->
-  <div class="container">
     <div id="demo" class="carousel slide h-75" data-bs-ride="carousel">
-      <div class="container">
-        
-      </div>
-        <!-- Indicators/dots -->
+      <div class="container-fluid">
         <div class="carousel-indicators">
           <button type="button" data-bs-target="#demo" data-bs-slide-to="0" class="active"></button>
           <button type="button" data-bs-target="#demo" data-bs-slide-to="1"></button>
@@ -99,13 +98,11 @@
           <span class="carousel-control-next-icon"></span>
         </button>
       </div>
+        <!-- Indicators/dots -->
+        
+      </div>
   </div>
-  <label for="productFilter">Chọn loại sản phẩm:</label>
-  <select id="productFilter" onchange="filterProducts()">
-    <option value="all">Tất cả</option>
-    <option value="phone">Điện thoại</option>
-    <option value="iphone">iPhone</option>
-  </select>
+
   <div class="container" id="productList">
       <div class="menu-item row">
       </div>
