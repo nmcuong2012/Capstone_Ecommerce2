@@ -10,6 +10,11 @@
   <!-- Bootstrap CSS v5.2.1 -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+
+  <!-- Sweet Alert2 -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.min.css">
+  <!-- SweetAlert2 JS -->
+  
   <!-- FontAwsome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <!-- Font google -->
@@ -23,7 +28,7 @@
   <header id="header">
           <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <a class="navbar-brand" href="./user.html">CYBERSHOP</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="true" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
@@ -48,7 +53,7 @@
         </nav> 
   </header>
   <div class="modal">
-    <button id="btn-close" class="btn btn-danger">X</button>
+    <button id="btn-close" class="btn-close"></button>
     <div class="modal-heading">
       <h1>Giỏ hàng của bạn</h1>
     </div>
@@ -58,7 +63,7 @@
       <p class="product-price"></p>
       <div class="cart-items"></div>
     </div>
-    <button class="btn btn-primary btn-checkout" id="btn-checkout">Thanh toán</button>
+    <button class="btn-checkout" id="btn-checkout"><span class="text">Thanh toán</span></button>
 </div>
   <!-- Carousel -->
   <div class="container">
@@ -95,8 +100,13 @@
         </button>
       </div>
   </div>
-
-  <div class="container" id="products">
+  <label for="productFilter">Chọn loại sản phẩm:</label>
+  <select id="productFilter" onchange="filterProducts()">
+    <option value="all">Tất cả</option>
+    <option value="phone">Điện thoại</option>
+    <option value="iphone">iPhone</option>
+  </select>
+  <div class="container" id="productList">
       <div class="menu-item row">
       </div>
   </div>
@@ -108,6 +118,8 @@
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
     integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
   </script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.all.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
     integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous">
