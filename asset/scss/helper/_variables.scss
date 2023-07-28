@@ -20,10 +20,4 @@ $fw-2: 500;
 $fw-3: 600;
 $fw-4: 700;
 
-/// Dinh nghia breakpoint de responsive
-$breakpoint: (
-  "small": 576px,
-  "medium": 768px,
-  "large": 992px,
-  "extra-large": 1200px,
-);
+$animationSpeed: 40s;
