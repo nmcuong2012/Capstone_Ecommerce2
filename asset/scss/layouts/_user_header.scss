@@ -1,7 +1,7 @@
 #header {
-  position: fixed;
+  position: relative;
   width: 100%;
-  z-index: 10;
+  z-index: 1;
   .cart-icon {
     display: flex;
     align-items: center;
@@ -33,7 +33,7 @@
   #navbarNav {
     justify-content: flex-end;
     padding-right: 20%;
-    @media (max-width: 991px) and(min-width: 767px) {
+    @media (max-width: 991px) and (min-width: 767px) {
       padding-right: 2%;
     }
     .nav-item {

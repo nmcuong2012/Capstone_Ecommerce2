@@ -24,9 +24,9 @@ function displayProduct(product) {
   productPrice.textContent = "Price: $" + product.price;
   menuItemDiv.appendChild(productPrice);
 
-  const productCamera = document.createElement("p");
-  productCamera.textContent = product.backCamera;
-  menuItemDiv.appendChild(productCamera);
+  // const productCamera = document.createElement("p");
+  // productCamera.textContent = product.backCamera;
+  // menuItemDiv.appendChild(productCamera);
 
   const buttonDiv = document.createElement("div");
   buttonDiv.classList.add("product-buttons");
@@ -118,6 +118,16 @@ function showModal() {
       const productDiv = document.createElement("div");
       productDiv.classList.add("cart-item");
 
+      const productDeleteButton = document.createElement("button");
+      productDeleteButton.textContent = "X";
+      productDeleteButton.classList.add("btn", "btn-danger", "btnn-remove");
+      productDiv.appendChild(productDeleteButton);
+      productDeleteButton.addEventListener("click", () => {
+        removeFromCart(product);
+        showModal();
+        updateProductQuantityOnCard;
+      });
+
       const productImage = document.createElement("img");
       productImage.src = product.img;
       productDiv.appendChild(productImage);
@@ -179,6 +189,22 @@ function calculateTotalPrice() {
   });
 
   return totalPrice;
+}
+
+// Loại bỏ sản phẩm ra khỏi giỏ hảng
+function removeFromCart(product) {
+  const existingProduct = cart.products.find((p) => p.id === product.id);
+  cart.products = cart.products.filter((p) => p.id !== product.id);
+  saveCartToLocalStorage(cart.products);
+  updateCartIcon();
+}
+//Cập nhật lại cart count khi xóa bỏ sản phẩm ra khỏi giỏ hàng
+function updateProductQuantityOnCard(product) {
+  const cardProduct = document.querySelector(
+    `[data-product-id="${product.id}"]`
+  );
+  const cardProductQuantity = cardProduct.querySelector(".product-quantity");
+  cardProductQuantity.textContent = "Số lượng: " + product.quantity;
 }
 
 // Nút tăng số lượng sản phẩm
@@ -289,6 +315,24 @@ navLinks.forEach((link) => {
     closeNavbarCollapse();
   });
 });
+document.addEventListener("DOMContentLoaded", function () {
+  window.onscroll = function () {
+    if (
+      document.body.scrollTop > 20 ||
+      document.documentElement.scrollTop > 20
+    ) {
+      document.getElementById("backToTopBtn").style.display = "block";
+    } else {
+      document.getElementById("backToTopBtn").style.display = "none";
+    }
+  };
+});
+
+// Hàm cuộn lên đầu trang
+function scrollToTop() {
+  document.body.scrollTop = 0;
+  document.documentElement.scrollTop = 0;
+}
 window.onload = () => {
   checkLocalStorage();
   displayProductsFromApi();

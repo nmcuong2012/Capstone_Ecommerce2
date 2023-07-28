@@ -1,8 +1,10 @@
+@charset "UTF-8";
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-family: CerebriSans-Regular, -apple-system, system-ui, Roboto, sans-serif;
+  position: relative;
 }
 
 html {
@@ -11,9 +13,9 @@ html {
 }
 
 #header {
-  position: fixed;
+  position: relative;
   width: 100%;
-  z-index: 10;
+  z-index: 1;
 }
 #header .cart-icon {
   display: flex;
@@ -50,6 +52,11 @@ html {
   justify-content: flex-end;
   padding-right: 20%;
 }
+@media (max-width: 991px) and (min-width: 767px) {
+  #header #navbarNav {
+    padding-right: 2%;
+  }
+}
 #header #navbarNav .nav-item .nav-link {
   padding: 25px;
   font-size: 1.1rem;
@@ -80,7 +87,7 @@ html {
   justify-content: space-between;
 }
 .menu-item .product-item {
-  flex: 0 0 calc(33.33% - 10px);
+  flex: 0 0 calc(25% - 10px);
   min-height: 300px;
   box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 0px;
   text-align: center;
@@ -183,9 +190,13 @@ html {
 .modal #btn-close {
   position: absolute;
   z-index: 999;
-  top: 0;
-  right: 0;
-  color: red !important;
+  top: 2%;
+  right: 2%;
+  color: wheat;
+}
+.modal #btn-close:hover {
+  background-color: #176b87;
+  border: none;
 }
 @keyframes square-in-bottom-left {
   from {
@@ -249,7 +260,7 @@ html {
   top: 55%;
   font-family: CerebriSans-Regular, -apple-system, system-ui, Roboto, sans-serif;
   left: 50%;
-  width: 100%;
+  width: 80%;
   height: 75%;
   overflow-y: auto;
   transform: translate(-50%, -50%);
@@ -272,6 +283,9 @@ html {
   display: block;
 }
 
+.cart-items {
+  position: relative;
+}
 .cart-items .total-div {
   text-align: center;
 }
@@ -289,12 +303,78 @@ html {
   padding: 2px 7px;
   color: #fff;
   margin-bottom: 10px;
+  margin-left: 10px;
+}
+.cart-items .cart-item .btnn-remove {
+  position: absolute;
+  right: 25%;
+  font-size: 10px;
+  top: 10%;
 }
 
-.carousel .carousel-inner .carousel-item img {
-  max-height: 500px;
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-1750px);
+  }
+}
+.slider {
+  background: white;
+  box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.125);
+  height: 100px;
+  margin: auto;
+  overflow: hidden;
+  width: 100%;
+  margin-top: 100px;
+}
+.slider::before, .slider::after {
+  background: linear-gradient(to right, rgb(255, 255, 255) 0%, rgba(255, 255, 255, 0) 100%);
+  content: "";
+  height: 100px;
+  width: 200px;
+  z-index: 2;
+}
+.slider::after {
+  right: 0;
+  top: 0;
+  transform: rotateZ(180deg);
+}
+.slider::before {
+  left: 0;
+  top: 0;
+}
+.slider .slide-track {
+  animation: scroll 40s linear infinite;
+  display: flex;
+  width: 3500px;
+}
+.slider .slide {
+  height: 100px;
+  width: 250px;
 }
 
 .price-total {
   text-align: center;
+}
+
+#backToTopBtn {
+  display: none; /* Ban đầu nút ẩn đi */
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background-color: green;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 15px;
+  font-size: 16px;
+  cursor: pointer;
+  z-index: 999;
+  transition: all 1s;
+}
+
+#backToTopBtn:hover {
+  background-color: #333;
 }/*# sourceMappingURL=user.css.map */
