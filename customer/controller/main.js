@@ -10,7 +10,7 @@ function displayProduct(product) {
     "col-sm-6",
     "product-item"
   );
-
+  menuItemDiv.setAttribute("data-product-name", product.name);
   const productImage = document.createElement("img");
   productImage.src = product.img;
   productImage.alt = product.name;
@@ -52,6 +52,29 @@ const cart = {
     );
   },
 };
+
+// bắt sự kiện dropdown
+const selectPhone = document.getElementById("selectPhone");
+selectPhone.addEventListener("change", function () {
+  const selectedValue = this.value;
+  console.log(selectedValue);
+  displayProductsByName(selectedValue);
+});
+
+// Hàm hiển thị sản phẩm của dropdown
+function displayProductsByName(productName) {
+  const menuItems = document.querySelectorAll(".menu-item .item");
+
+  menuItems.forEach((item) => {
+    const productNameAttribute = item.getAttribute("data-product-name");
+
+    if (productName === "All" || productNameAttribute.includes(productName)) {
+      item.style.display = "block";
+    } else {
+      item.style.display = "none";
+    }
+  });
+}
 
 function updateCartIcon() {
   const cartIcon = document.querySelector(".cart-icon");
@@ -336,4 +359,5 @@ function scrollToTop() {
 window.onload = () => {
   checkLocalStorage();
   displayProductsFromApi();
+  displayProductsByName("All");
 };

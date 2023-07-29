@@ -359,6 +359,29 @@ html {
   text-align: center;
 }
 
+.findArea {
+  text-align: center;
+  margin-top: 100px;
+}
+.findArea #selectPhone {
+  padding: 15px 40px;
+  border-radius: 5px;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
+  border: none;
+  outline: none;
+  color: #176b87;
+  font-size: 1.1rem;
+  font-weight: 700;
+  transition: all 1s;
+}
+.findArea #selectPhone option {
+  transition: all 1s;
+}
+.findArea #selectPhone:hover {
+  background-color: #176b87;
+  color: #fff;
+}
+
 #backToTopBtn {
   display: none; /* Ban đầu nút ẩn đi */
   position: fixed;
