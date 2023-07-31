@@ -13,9 +13,10 @@ html {
 }
 
 #header {
-  position: relative;
+  position: fixed;
   width: 100%;
   z-index: 1;
+  top: 0;
 }
 #header .cart-icon {
   display: flex;
@@ -38,7 +39,7 @@ html {
   color: #2a73dd;
 }
 #header .cart-icon .fa:hover {
-  transform: scale(1.1);
+  transform: scale(1.5);
   transition: all 0.5s ease;
 }
 #header .navbar-brand {
@@ -47,6 +48,16 @@ html {
   font-weight: 700;
   font-family: "Lobster", cursive;
   padding-left: 10%;
+}
+#header .navbar-toggler {
+  position: relative;
+}
+#header .navbar-toggler .cart-quantity-toggler {
+  position: absolute;
+  top: -20%;
+  color: #2a73dd;
+  font-size: 1.1rem;
+  font-weight: 700;
 }
 #header #navbarNav {
   justify-content: flex-end;
@@ -70,6 +81,11 @@ html {
   transform: scaleX(0);
   transition: 0.2s;
 }
+@media (max-width: 767px) {
+  #header #navbarNav .nav-item .nav-link::after {
+    width: 20%;
+  }
+}
 #header #navbarNav .nav-item .nav-link:hover::after {
   transform: scalex(1);
 }
@@ -82,9 +98,9 @@ html {
 }
 
 .menu-item {
+  display: flex;
   flex-wrap: wrap;
   padding-top: 150px;
-  justify-content: space-between;
 }
 .menu-item .product-item {
   flex: 0 0 calc(25% - 10px);
@@ -92,7 +108,7 @@ html {
   box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 0px;
   text-align: center;
   padding: 20px;
-  margin-bottom: 30px;
+  white-space: nowrap;
 }
 @media (max-width: 1199px) and (min-width: 992px) {
   .menu-item .product-item {
@@ -121,7 +137,7 @@ html {
 }
 .menu-item .product-item img {
   width: auto;
-  height: 150px;
+  max-height: 100px;
 }
 .menu-item .product-item p {
   color: #1d365e;
@@ -135,7 +151,12 @@ html {
   margin-bottom: 30px;
 }
 .menu-item .product-item .product-buttons {
-  margin-top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.menu-item .product-item .product-buttons button {
+  margin: 5px;
 }
 .menu-item .product-item .product-buttons .btn-add {
   background-color: #c2fbd7;
@@ -159,6 +180,8 @@ html {
 .menu-item .product-item .product-buttons .btn-add:hover {
   box-shadow: rgba(44, 187, 99, 0.35) 0 -25px 18px -14px inset, rgba(44, 187, 99, 0.25) 0 1px 2px, rgba(44, 187, 99, 0.25) 0 2px 4px, rgba(44, 187, 99, 0.25) 0 4px 8px, rgba(44, 187, 99, 0.25) 0 8px 16px, rgba(44, 187, 99, 0.25) 0 16px 32px;
   transform: scale(1.05) rotate(-1deg);
+  background-color: #176b87;
+  color: #fff;
 }
 .menu-item .product-item:hover {
   transform: scale(1.1);
@@ -327,7 +350,7 @@ html {
   margin: auto;
   overflow: hidden;
   width: 100%;
-  margin-top: 100px;
+  margin-top: 200px;
 }
 .slider::before, .slider::after {
   background: linear-gradient(to right, rgb(255, 255, 255) 0%, rgba(255, 255, 255, 0) 100%);

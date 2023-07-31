@@ -1,14 +1,14 @@
 .menu-item {
+  display: flex;
   flex-wrap: wrap;
   padding-top: 150px;
-  justify-content: space-between;
   .product-item {
     flex: 0 0 calc(25% - 10px);
     min-height: 300px;
     box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 0px;
     text-align: center;
     padding: 20px;
-    margin-bottom: 30px;
+    white-space: nowrap;
     @media (max-width: 1199px) and (min-width: 992px) {
       flex: 0 0 calc(33.33% - 20px);
     }
@@ -29,7 +29,7 @@
     }
     img {
       width: auto;
-      height: 150px;
+      max-height: 100px;
     }
     p {
       @include styleText($color-blue-1, $fs-1, $fw-2);
@@ -41,7 +41,12 @@
       margin-bottom: 30px;
     }
     .product-buttons {
-      margin-top: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      button {
+        margin: 5px;
+      }
       .btn-add {
         background-color: #c2fbd7;
         border-radius: 100px;
@@ -70,6 +75,8 @@
           rgba(44, 187, 99, 0.25) 0 4px 8px, rgba(44, 187, 99, 0.25) 0 8px 16px,
           rgba(44, 187, 99, 0.25) 0 16px 32px;
         transform: scale(1.05) rotate(-1deg);
+        background-color: #176b87;
+        color: #fff;
       }
     }
   }
@@ -159,6 +166,7 @@
   }
   .modal-heading {
     position: relative;
+
     h1 {
       color: #176b87;
       font-size: $fs-3;
@@ -253,7 +261,7 @@
   overflow: hidden;
   // position: relative;
   width: 100%;
-  margin-top: 100px;
+  margin-top: 200px;
 
   &::before,
   &::after {
