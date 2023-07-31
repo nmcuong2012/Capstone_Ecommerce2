@@ -79,15 +79,19 @@ function displayProductsByName(productName) {
 function updateCartIcon() {
   const cartIcon = document.querySelector(".cart-icon");
   const cartQuantity = document.querySelector(".cart-quantity");
+  const cartQuantityToggler = document.getElementById("cartQuantityToggler"); // Get the toggler cart quantity element
 
   const totalQuantity = cart.getTotalQuantity();
 
   cartQuantity.textContent = totalQuantity;
+  cartQuantityToggler.textContent = totalQuantity; // Update the toggler cart quantity
 
   if (totalQuantity > 0) {
     cartQuantity.style.display = "block";
+    cartQuantityToggler.style.display = "inline-block"; // Show the toggler cart quantity
   } else {
     cartQuantity.style.display = "none";
+    cartQuantityToggler.style.display = "none"; // Hide the toggler cart quantity
   }
 }
 
@@ -356,6 +360,11 @@ function scrollToTop() {
   document.body.scrollTop = 0;
   document.documentElement.scrollTop = 0;
 }
+window.addEventListener("resize", () => {
+  if (window.innerWidth < 768) {
+    updateCartIcon();
+  }
+});
 window.onload = () => {
   checkLocalStorage();
   displayProductsFromApi();

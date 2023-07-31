@@ -1,7 +1,8 @@
 #header {
-  position: relative;
+  position: fixed;
   width: 100%;
   z-index: 1;
+  top: 0;
   .cart-icon {
     display: flex;
     align-items: center;
@@ -20,7 +21,7 @@
       color: $color-blue-2;
     }
     .fa:hover {
-      transform: scale(1.1);
+      transform: scale(1.5);
       transition: all 0.5s ease;
     }
   }
@@ -29,7 +30,16 @@
     font-family: "Lobster", cursive;
     padding-left: 10%;
   }
-
+  .navbar-toggler {
+    position: relative;
+    .cart-quantity-toggler {
+      position: absolute;
+      top: -20%;
+      color: $color-blue-2;
+      font-size: $fs-2;
+      font-weight: $fw-4;
+    }
+  }
   #navbarNav {
     justify-content: flex-end;
     padding-right: 20%;
@@ -48,6 +58,11 @@
           background-color: $color-blue-2;
           transform: scaleX(0);
           transition: 0.2s;
+        }
+        @media (max-width: 767px) {
+          &::after {
+            width: 20%;
+          }
         }
 
         &:hover {
