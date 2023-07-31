@@ -21,12 +21,8 @@ function displayProduct(product) {
   menuItemDiv.appendChild(productName);
 
   const productPrice = document.createElement("span");
-  productPrice.textContent = "Price: $" + product.price;
+  productPrice.textContent = "Price: " + formatCurrency(product.price);
   menuItemDiv.appendChild(productPrice);
-
-  // const productCamera = document.createElement("p");
-  // productCamera.textContent = product.backCamera;
-  // menuItemDiv.appendChild(productCamera);
 
   const buttonDiv = document.createElement("div");
   buttonDiv.classList.add("product-buttons");
@@ -164,7 +160,7 @@ function showModal() {
       productDiv.appendChild(productName);
 
       const productPrice = document.createElement("p");
-      productPrice.textContent = "Giá: $" + product.price;
+      productPrice.textContent = "Giá: " + formatCurrency(product.price);
       productDiv.appendChild(productPrice);
 
       const productQuantity = document.createElement("p");
@@ -196,7 +192,7 @@ function showModal() {
   const totalPrice = calculateTotalPrice();
   const totalDiv = document.createElement("div");
   totalDiv.classList.add("total-div");
-  totalDiv.textContent = "Tổng giá trị đơn hàng: $" + totalPrice;
+  totalDiv.textContent = "Tổng giá trị đơn hàng: " + formatCurrency(totalPrice);
   cartItems.appendChild(totalDiv);
 
   gsap.to(modal, {
@@ -359,6 +355,11 @@ document.addEventListener("DOMContentLoaded", function () {
 function scrollToTop() {
   document.body.scrollTop = 0;
   document.documentElement.scrollTop = 0;
+}
+function formatCurrency(number) {
+  return number
+    .toLocaleString("en-US", { style: "currency", currency: "USD" })
+    .slice(0, -3);
 }
 window.addEventListener("resize", () => {
   if (window.innerWidth < 768) {
