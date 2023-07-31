@@ -311,6 +311,9 @@ html {
 }
 .cart-items .total-div {
   text-align: center;
+  color: red;
+  font-size: 1.1rem;
+  font-weight: 600;
 }
 .cart-items .cart-item {
   margin-bottom: 20px;

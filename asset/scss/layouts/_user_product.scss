@@ -216,6 +216,9 @@
   position: relative;
   .total-div {
     text-align: center;
+    color: red;
+    font-size: $fs-2;
+    font-weight: $fw-3;
   }
   .cart-item {
     margin-bottom: 20px;
