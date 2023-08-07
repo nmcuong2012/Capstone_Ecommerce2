@@ -278,7 +278,7 @@ document.getElementById("btn-checkout").onclick = () => {
     Swal.fire({
       icon: "success",
       title: "Thanh toán thành công!",
-      text: "Số tiền thanh toán: $" + total,
+      text: "Số tiền thanh toán: " + formatCurrency(total),
     });
     checkOut();
   } else {
